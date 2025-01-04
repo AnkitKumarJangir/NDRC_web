@@ -9,7 +9,8 @@ export const routes: Routes = [
   },
   {
     path: '',
-    // component: LayoutComponent,
+    component: LayoutComponent,
+
     loadChildren: () =>
       import('./pages/pages.module').then((m) => m.PagesModule),
   },

@@ -7,10 +7,14 @@ import {
   TOPBAR,
 } from './layouts.model';
 import { EventService } from '../core/service/event.service';
+import { CommonModule } from '@angular/common';
+import { VerticalComponent } from './vertical/vertical.component';
+import { HorizontalComponent } from './horizontal/horizontal.component';
 
 @Component({
   selector: 'app-layout',
   standalone: true,
+  imports: [CommonModule, VerticalComponent, HorizontalComponent],
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss'],
 })

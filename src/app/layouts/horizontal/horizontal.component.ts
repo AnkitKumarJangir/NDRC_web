@@ -1,9 +1,20 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { TOPBAR } from '../layouts.model';
 import { EventService } from '../../core/service/event.service';
+import { RightsidebarComponent } from '../rightsidebar/rightsidebar.component';
+import { FooterComponent } from '../footer/footer.component';
+import { HorizontaltopbarComponent } from '../horizontaltopbar/horizontaltopbar.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-horizontal',
+  standalone: true,
+  imports: [
+    RightsidebarComponent,
+    RouterOutlet,
+    FooterComponent,
+    HorizontaltopbarComponent,
+  ],
   templateUrl: './horizontal.component.html',
   styleUrls: ['./horizontal.component.scss'],
 })

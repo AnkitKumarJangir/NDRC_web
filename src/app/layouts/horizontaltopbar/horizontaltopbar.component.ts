@@ -1,7 +1,6 @@
 import { Component, OnInit, AfterViewInit, Inject } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
-import { LanguageService } from '../../core/service/language.service';
 
 import { EventService } from '../../core/service/event.service';
 
@@ -9,9 +8,12 @@ import { DOCUMENT } from '@angular/common';
 
 import { MENU } from './menu';
 import { MenuItem } from './menu.model';
+import { SimplebarAngularModule } from 'simplebar-angular';
 
 @Component({
   selector: 'app-horizontaltopbar',
+  standalone: true,
+  imports: [SimplebarAngularModule],
   templateUrl: './horizontaltopbar.component.html',
   styleUrls: ['./horizontaltopbar.component.scss'],
 })
@@ -41,7 +43,6 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
     @Inject(DOCUMENT) private document: any,
     private router: Router,
     private eventService: EventService,
-    public languageService: LanguageService,
     // tslint:disable-next-line: variable-name
     public _cookiesService: CookieService
   ) {
@@ -73,7 +74,7 @@ export class HorizontaltopbarComponent implements OnInit, AfterViewInit {
     this.countryName = text;
     this.flagvalue = flag;
     this.cookieValue = lang;
-    this.languageService.setLanguage(lang);
+    // this.languageService.setLanguage(lang);
   }
 
   /**

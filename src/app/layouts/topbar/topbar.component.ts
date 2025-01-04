@@ -3,14 +3,13 @@ import { Router } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 
 import { CookieService } from 'ngx-cookie-service';
-import { TranslateService } from '@ngx-translate/core';
-import { Store } from '@ngrx/store';
 
-import { takeWhile } from 'rxjs/operators';
-import { LanguageService } from '../../core/service/language.service';
+import { NgbDropdownModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-topbar',
+  standalone: true,
+  imports: [NgbDropdownModule],
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.scss'],
 })
@@ -31,10 +30,7 @@ export class TopbarComponent implements OnInit {
   constructor(
     @Inject(DOCUMENT) private document: any,
     private router: Router,
-    public languageService: LanguageService,
-    public translate: TranslateService,
-    public _cookiesService: CookieService,
-    private store: Store<{}>
+    public _cookiesService: CookieService
   ) {}
 
   listLang = [
@@ -75,7 +71,7 @@ export class TopbarComponent implements OnInit {
     this.countryName = text;
     this.flagvalue = flag;
     this.cookieValue = lang;
-    this.languageService.setLanguage(lang);
+    // this.languageService.setLanguage(lang);
   }
 
   /**

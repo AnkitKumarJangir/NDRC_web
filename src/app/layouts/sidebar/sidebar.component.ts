@@ -7,17 +7,18 @@ import {
   Input,
   OnChanges,
 } from '@angular/core';
-import MetisMenu from 'metismenujs/dist/metismenujs';
+import MetisMenu from 'metismenujs';
 import { Router, NavigationEnd } from '@angular/router';
-
-import { HttpClient } from '@angular/common/http';
 
 import { MENU } from './menu';
 import { MenuItem } from './menu.model';
-import { TranslateService } from '@ngx-translate/core';
+import { SimplebarAngularModule } from 'simplebar-angular';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-sidebar',
+  standalone: true,
+  imports: [SimplebarAngularModule, CommonModule],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
@@ -31,11 +32,7 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
 
   @ViewChild('sideMenu') sideMenu: ElementRef;
 
-  constructor(
-    private router: Router,
-    public translate: TranslateService,
-    private http: HttpClient
-  ) {
+  constructor(private router: Router) {
     router.events.forEach((event) => {
       if (event instanceof NavigationEnd) {
         this._activateMenuDropdown();
