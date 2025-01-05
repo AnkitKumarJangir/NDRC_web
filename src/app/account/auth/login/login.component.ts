@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AccountService } from '../../../services/account.service';
+import { takeWhile } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import Cookies from 'js-cookie';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,24 +12,22 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
   loginForm!: FormGroup;
-  submitted = false;
-  error = '';
-  returnUrl: string | undefined;
   isLive: boolean = true;
-  checkWorkspace: boolean = false;
-  buttonName = 'Next';
+  buttonName = 'Submit';
+  loader = false;
 
-  // set the currenr year
-  year: number = new Date().getFullYear();
-
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private _account: AccountService,
+    private _router: Router,
+    private _toastr: ToastrService
+  ) {}
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required]],
-      email: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
   }
@@ -33,13 +36,31 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    if (!this.checkWorkspace) {
+    if (this.loginForm.valid) {
+      this.loader = true;
+      this._account
+        .login(this.loginForm.value)
+        .pipe(takeWhile(() => this.isLive))
+        .subscribe({
+          next: (response: { data: object; token: string }) => {
+            if (response) {
+              this.loader = false;
+              Cookies.set('ndrc_token', response.token);
+              Cookies.set('ndrc_user', JSON.stringify(response.data));
+              this._toastr.success('Successfully logged In!');
+              this._router.navigateByUrl('/dashboard');
+            }
+          },
+          error: (err) => {
+            this.loader = false;
+            this._toastr.error(err);
+          },
+        });
     } else {
+      this.loginForm.markAllAsTouched();
     }
   }
-
-  editSubdomain() {
-    this.checkWorkspace = false;
-    this.buttonName = 'Next';
+  ngOnDestroy(): void {
+    this.isLive = false;
   }
 }

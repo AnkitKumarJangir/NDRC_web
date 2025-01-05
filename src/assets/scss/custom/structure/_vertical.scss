@@ -360,7 +360,7 @@
 
 body[data-sidebar="dark"] {
   .vertical-menu {
-    background: $sidebar-dark-bg;
+    background: $white;
   }
 
   #sidebar-menu {
@@ -411,7 +411,7 @@ body[data-sidebar="dark"] {
           > li {
             &:hover {
               > a {
-                background: lighten($sidebar-dark-bg, 2%);
+                background: lighten($white, 2%);
                 color: $sidebar-dark-menu-item-hover-color;
 
                 i {
@@ -432,7 +432,7 @@ body[data-sidebar="dark"] {
           }
 
           ul {
-            background-color: $sidebar-dark-bg;
+            background-color: $white;
           }
         }
 
@@ -441,12 +441,12 @@ body[data-sidebar="dark"] {
             &.mm-active .active {
               // color: $sidebar-menu-item-active-color !important;
               // updated for side menu active
-              color: #ffff !important;
+              color: #ea5455 !important;
 
               i {
                 // color: $sidebar-menu-item-active-color !important;
                 // updated for side menu active
-                color: #ffff !important;
+                color: #ea5455 !important;
               }
             }
           }

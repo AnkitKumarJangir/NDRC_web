@@ -8,7 +8,7 @@ import {
   OnChanges,
 } from '@angular/core';
 import MetisMenu from 'metismenujs';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, RouterModule } from '@angular/router';
 
 import { MENU } from './menu';
 import { MenuItem } from './menu.model';
@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [SimplebarAngularModule, CommonModule],
+  imports: [SimplebarAngularModule, RouterModule, CommonModule],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })

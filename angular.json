@@ -33,6 +33,7 @@
               "src/styles.scss",
               "src/assets/scss/bootstrap.scss",
               "src/assets/scss/app.scss",
+              "node_modules/ngx-toastr/toastr.css",
               "src/assets/scss/icons.scss"
             ],
             "scripts": [
