@@ -1,0 +1,240 @@
+<div class="modal-content large-modal-content">
+    <div class="popup-header">
+        <div class="row">
+            <div class="col-md-10">
+                <h5 class="text-white">Loading Slip</h5>
+            </div>
+            <div class="col-md-2 text-end">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closePop()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <app-loader *ngIf="loading"></app-loader>
+        <div *ngIf="!loading" (click)="printSlip()" class="col-12 my-2 text-end"><button
+                class="btn btn-success btn-sm"><i class="fas fa-print font-size-16"></i>
+                Print</button></div>
+        <div class="card" *ngIf="!loading" id="PrintInvoice">
+            <div class="" style="padding: 15px">
+                <div class="header" style="text-align: center">
+                    <div class="pan_no" style="
+                text-align: left;
+                font-size: 12px;
+                font-family: sans-serif;
+                font-weight: 500;
+                text-align: left;
+              ">
+                        Pan No. {{ companyData?.pan_no }}
+                    </div>
+                    <div class="company_name" style="
+                color: #d82d3d;
+                font-size: 23px;
+                font-weight: 600;
+                font-family: revert;
+                padding: 0px 30px 0px 30px;
+              ">
+                        {{ companyData?.company_name }}
+                    </div>
+                    <div class="c_type" style="
+                font-size: 10px;
+                font-weight: 400;
+                margin-top: 5px;
+                padding: 2px;
+              ">
+                        <div class="sub_type" style="
+                  background-color: black;
+                  -webkit-print-color-adjust: exact;
+                  color: white;
+                  width: fit-content;
+                  padding: inherit;
+                  margin: auto;
+                ">
+                            TRANSPORT CONTRACTOR & COMMISSION AGENT
+                        </div>
+                    </div>
+                    <div class="c_address" style="font-size: 10px; font-weight: 500; margin-top: 5px">
+                        {{ companyData?.address }}
+                        <!-- N.H.2, Jajru More, Near A.C.E. ltd. Sector -59<br />Ballabgarh,
+              Faridabad -->
+                    </div>
+                    <div class="contact" style="font-size: 10px; font-weight: 500">
+                        Mob.
+                        <span *ngFor="
+                  let item of companyData?.contact;
+                  let i = index;
+                  let l = last
+                ">{{ item }}<span *ngIf="!l">,</span><br *ngIf="i == 1" /></span><br />Email :{{
+                        companyData?.company_email }}
+                    </div>
+                    <div class="title" style="
+                margin-top: 13px;
+                font-size: 15px;
+                font-weight: 900;
+                font-family: sans-serif;
+              ">
+                        Loading Slip
+                    </div>
+                </div>
+                <div class="loading-body" style="margin-top: 15px; font-size: 13px">
+                    <div style="display: flex">
+                        <div>
+                            S.No
+                            <span class="key-vlaue" style="font-weight: 600">{{
+                                loadingData?.s_no ? loadingData?.s_no : "............."
+                                }}</span>
+                        </div>
+
+                        <div style="margin-left: auto">
+                            Date
+                            <span class="key-vlaue" style="font-weight: 600">{{
+                                loadingData?.date ? loadingData?.date : ".........."
+                                }}</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px">
+                        <div>
+                            To &nbsp;&nbsp;<span><span class="key-vlaue" style="font-weight: 600">{{
+                                    loadingData?.party
+                                    ? loadingData?.party
+                                    :
+                                    "...................................................................................."
+                                    }}</span></span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; display: flex">
+                        <div>
+                            Address
+                            <span class="key-vlaue" style="font-weight: 600">{{
+                                loadingData?.address ? loadingData?.address : "............"
+                                }}</span>
+                        </div>
+                        <div style="margin-left: auto">
+                            Trailor No. &nbsp;<span class="key-vlaue" style="font-weight: 600">{{
+                                loadingData?.trailor_no
+                                ? loadingData?.trailor_no
+                                : "............"
+                                }}</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; display: flex">
+                        <div>
+                            From &nbsp;<span class="key-vlaue" style="font-weight: 600">{{
+                                loadingData?.from ? loadingData?.from : "............"
+                                }}</span>
+                        </div>
+                        <div style="margin-left: auto">
+                            To &nbsp;<span class="key-vlaue" style="font-weight: 600">{{
+                                loadingData?.to ? loadingData?.to : "............"
+                                }}</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px">
+                        <div>
+                            Goods &nbsp;<span><span class="key-vlaue" style="font-weight: 600">{{
+                                    loadingData?.goods
+                                    ? loadingData?.goods
+                                    : ".............................................................................."
+                                    }}</span></span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; display: flex">
+                        <div>
+                            Freight &nbsp;<span class="key-vlaue" style="font-weight: 600">{{
+                                loadingData?.freight ? loadingData?.freight : "............"
+                                }}</span>
+                        </div>
+                        <div style="margin-left: auto">
+                            P.M.T. &nbsp;<span class="key-vlaue" style="font-weight: 600">{{
+                                loadingData?.p_m_t ? loadingData?.p_m_t : "............"
+                                }}</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; display: flex">
+                        <div>
+                            Fine &nbsp;<span class="key-vlaue" style="font-weight: 600">{{
+                                loadingData?.fine ? loadingData?.fine : "............"
+                                }}</span>
+                        </div>
+                        <div style="margin-left: auto">
+                            Detain &nbsp;<span class="key-vlaue" style="font-weight: 600">{{
+                                loadingData?.detain ? loadingData?.detain : "............"
+                                }}</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; display: flex">
+                        <div>
+                            Size &nbsp;<span class="key-vlaue" style="font-weight: 600">{{
+                                loadingData?.size ? loadingData?.size : "......"
+                                }}</span>
+                        </div>
+                        <div style="margin-left: auto">
+                            L. &nbsp;<span class="key-vlaue" style="font-weight: 600">{{
+                                loadingData?.l ? loadingData?.l : "......"
+                                }}</span>
+                        </div>
+                        <div style="margin-left: auto">
+                            W. &nbsp;<span class="key-vlaue" style="font-weight: 600">{{
+                                loadingData?.w ? loadingData?.w : "......"
+                                }}</span>
+                        </div>
+                        <div style="margin-left: auto">
+                            H. &nbsp;<span class="key-vlaue" style="font-weight: 600">{{
+                                loadingData?.h ? loadingData?.h : "......"
+                                }}</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; display: flex">
+                        <div>
+                            Weight &nbsp;<span class="key-vlaue" style="font-weight: 600">{{
+                                loadingData?.weight
+                                ? loadingData?.weight + " " + "MT"
+                                : "............"
+                                }}</span>
+                        </div>
+                        <div style="margin-left: auto">
+                            Guarantee &nbsp;<span class="key-vlaue" style="font-weight: 600">{{
+                                loadingData?.guarantee
+                                ? loadingData?.guarantee
+                                : "............"
+                                }}</span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; display: flex">
+                        <div>
+                            Advance &nbsp;<span><span class="key-vlaue" style="font-weight: 600">{{
+                                    loadingData?.advance
+                                    ? loadingData?.advance
+                                    : ".........................................................................."
+                                    }}</span></span>
+                        </div>
+                    </div>
+                    <div style="margin-top: 15px; display: flex">
+                        <div>
+                            Balance &nbsp;<span><span class="key-vlaue" style="font-weight: 600">{{
+                                    loadingData?.balance
+                                    ? loadingData?.balance
+                                    : "..........................................................................."
+                                    }}</span></span>
+                        </div>
+                    </div>
+                    <div style="height: 20px; margin-top: 15px">
+                        <div class="margin-top: 10px;" style="font-size: 10px">
+                            <div></div>
+                            <div style="text-align: end">
+                                <span class="key-vlaue" style="font-weight: 600">{{
+                                    loadingData?.created_by
+                                    }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="font-size: 10px; margin-top: 15px; display: flex">
+                        <div>Party's Sign. & With Stemp</div>
+                        <div style="margin-left: auto">For New Deep Road Carrier</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

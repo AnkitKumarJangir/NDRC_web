@@ -1,57 +1,58 @@
-.modal-content{
-    border:0px !important
+.modal-content {
+  border: 0px !important;
 }
 .card {
-    border: 1px solid #f1f1f1;
+  // border: 1px solid #f1f1f1;
 }
-.navbar-header, .sub-nav{
-    border-bottom: 1px solid #f1f1f1;
+.navbar-header,
+.sub-nav {
+  border-bottom: 1px solid #f1f1f1;
 }
-.menu{
-    background: #fff;
-    margin: 0px;
-    padding: 0px;
-    margin: -19px -16px 0px -16px;
-    padding-left: 22px;
-    border-bottom: 1px solid #f1f1f1;
+.menu {
+  background: #fff;
+  margin: 0px;
+  padding: 0px;
+  margin: -19px -16px 0px -16px;
+  padding-left: 22px;
+  border-bottom: 1px solid #f1f1f1;
 }
-.menu a{
-    padding: 10px 10px;
-    display: inline-block;
-    color: #495057;
-    font-weight: 500;
+.menu a {
+  padding: 10px 10px;
+  display: inline-block;
+  color: #495057;
+  font-weight: 500;
 }
-.menu a.active{
-    color: #556ee6 !important;
+.menu a.active {
+  color: #556ee6 !important;
 }
-.popup-header{
-    background-color: #2a3042;
-    padding: 5px;
+.popup-header {
+  background-color: #ea5455;
+  padding: 5px;
 }
-.popup-header h5{
-    margin:0px;
-    padding: 4px 15px;
+.popup-header h5 {
+  margin: 0px;
+  padding: 4px 15px;
 }
-.popup-header button{
-    font-size: 25px;
-    color: #fff;
-    opacity: 1;
-    text-shadow: none;
-    font-weight: 400;
-    padding: 1px 7px;
+.popup-header button {
+  font-size: 25px;
+  color: #fff;
+  opacity: 1;
+  text-shadow: none;
+  font-weight: 400;
+  padding: 1px 7px;
 }
-.popup-header button:hover{
-    color: #fff;
-    opacity: 1;
-    text-shadow: none;
-    font-weight: 400;
+.popup-header button:hover {
+  color: #fff;
+  opacity: 1;
+  text-shadow: none;
+  font-weight: 400;
 }
 
-.tab-content{
-    border: 1px solid #ccc;
-    margin-top: -1px;
+.tab-content {
+  border: 1px solid #ccc;
+  margin-top: -1px;
 }
-.btn{
-    border:1px  solid #ccc;
-    margin: 0px 5px;
+.btn {
+  border: 1px solid #ccc;
+  margin: 0px 5px;
 }

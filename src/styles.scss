@@ -1,1 +1,39 @@
- 
+/* You can add global styles to this file, and also import other style files */
+
+// theme color
+.theme-color {
+  color: #ea5455 !important;
+}
+.theme-text-color {
+  color: #ea5455 !important;
+}
+.theme-bg-color {
+  background-color: #ea5455 !important;
+}
+
+.table {
+  font-size: 13px !important;
+  th,
+  td {
+    padding: 5px !important;
+    background-color: transparent !important;
+  }
+}
+
+.card {
+  border: 0px !important;
+}
+
+// popup
+.popup-header {
+  button.close {
+    background-color: transparent !important;
+    border: 0px;
+  }
+}
+
+// general
+
+.cp {
+  cursor: pointer;
+}
