@@ -17,6 +17,8 @@
 </div>
 <div class="card">
     <div class="card-body">
+        <app-filter-box [filterList]="['DateRange','SearchText']"
+            (filterApplied)="filterApplied($event)"></app-filter-box>
         <app-loader *ngIf="loader"></app-loader>
         <div class="table-responsive" *ngIf="!loader">
             <table class="table table-striped table-boarderd">
@@ -68,5 +70,7 @@
 
             </table>
         </div>
+        <app-pagination (loading)="loader = $event" (paginatedData)="setData($event)" [next]="pagination?.next"
+            [previous]="pagination?.previous"></app-pagination>
     </div>
 </div>

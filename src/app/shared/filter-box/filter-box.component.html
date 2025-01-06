@@ -1,0 +1,52 @@
+<div class="filter-box mt-2">
+    <div class="row">
+        <div class="col-8">
+            <ul class="w-100" *ngIf="heads && heads?.length">
+                <ng-container *ngFor="let head of heads;let last = last">
+                    <li [style.width.%]="100 / heads.length"
+                        [ngStyle]="!last &&{'border-right': '1px solid lightgray'}">
+                        <ng-container *ngTemplateOutlet="getHead(head)"></ng-container>
+                    </li>
+                </ng-container>
+            </ul>
+        </div>
+        <div class="col-4 text-end">
+            <button class="btn btn-sm theme-bg-color text-white" (click)="applyfilter()">
+                <i class="fas fa-search"></i> Search
+            </button>
+            <button class="ms-2 btn btn-sm btn-light " (click)="reset()">
+                <i class="fas fa-redo-alt"></i> Reset
+            </button>
+        </div>
+
+    </div>
+
+
+</div>
+<ng-template #DateRange>
+    <div ngbDropdown class="tab-menu">
+        <button id="dropdownForm121w1" ngbDropdownToggle>Date Range</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownForm121w1" class="filter-dropdown">
+            <form class="p-2">
+                <div class="custom-checkbox">
+                    <label for="">Start Date:</label>
+                    <input type="date" class="form-control form-control-sm" [(ngModel)]="start_date"
+                        [ngModelOptions]="{ standalone: true }" />
+                </div>
+                <div class="custom-checkbox mt-1">
+                    <label for="">End Date:</label>
+                    <input type="date" class="form-control form-control-sm" [(ngModel)]="end_date"
+                        [ngModelOptions]="{ standalone: true }" />
+                </div>
+                <div class="col-12 mt-4 text-center">
+                    <span *ngFor="let type of datePiker"
+                        class="badge rounded-pill bg-{{ type.colorCode }}  ms-1 showPointer"
+                        (click)="dateRange(type)">{{ type.name }}</span>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-template>
+<ng-template #SearchText>
+    <input type="text" class="form-control search-input form-control-sm" placeholder="search..." [(ngModel)]="search" />
+</ng-template>

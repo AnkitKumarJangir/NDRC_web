@@ -1,0 +1,9 @@
+<div class="row justify-content-between">
+    <div class="col-5">
+    </div>
+    <div class="col-5 text-end">
+        <button (click)="previousPage()" [disabled]="!previous"
+            class="btn btn-sm theme-bg-color text-white ">Previous</button>
+        <button (click)="nextPage()" [disabled]="!next" class="btn btn-sm theme-bg-color text-white  ms-2">Next</button>
+    </div>
+</div>

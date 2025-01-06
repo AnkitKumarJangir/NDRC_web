@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { baseurl } from '../config';
 import Cookies from 'js-cookie';
+import { HttpClient } from '@angular/common/http';
 @Injectable({
   providedIn: 'root',
 })
 export class HelperService {
-  constructor() {}
+  constructor(private _http: HttpClient) {}
 
   getAuthToken() {
     const accessToken = Cookies.get('ndrc_token');
@@ -46,4 +47,8 @@ export class HelperService {
     }
     return 'Oops! unable to retrive the message';
   };
+
+  pagination(link) {
+    return this._http.get(link);
+  }
 }

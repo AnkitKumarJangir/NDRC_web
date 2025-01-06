@@ -17,6 +17,7 @@ export class LoadingSlipsComponent implements OnInit, OnDestroy {
   loader = false;
   islive = true;
   slipList = [];
+  pagination = null;
   constructor(
     private _loadingslip: LoadingSlipsService,
     private _toastr: ToastrService,
@@ -26,11 +27,13 @@ export class LoadingSlipsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.loadSlips();
   }
-
+  filterApplied($event) {
+    this.loadSlips($event);
+  }
   loadSlips(filter = null, isExport = false) {
     this.loader = true;
     this._loadingslip
-      .getLoadingSlips({ ...filter }, isExport)
+      .getLoadingSlips(filter, isExport)
       .pipe(takeWhile(() => this.islive))
       .subscribe({
         next: (value: any) => {
@@ -38,7 +41,7 @@ export class LoadingSlipsComponent implements OnInit, OnDestroy {
           if (isExport) {
             this._export.saveAsFile(value, 'loading-slips.xlsx', 'xlsx');
           } else {
-            this.slipList = value.data;
+            this.setData(value);
           }
         },
         error: (err) => {
@@ -46,6 +49,10 @@ export class LoadingSlipsComponent implements OnInit, OnDestroy {
           this._toastr.error(err);
         },
       });
+  }
+  setData(value) {
+    this.pagination = value;
+    this.slipList = value.results;
   }
   viewSlip(id) {
     const ref = this._model.open(SlipPreviewComponent, {
