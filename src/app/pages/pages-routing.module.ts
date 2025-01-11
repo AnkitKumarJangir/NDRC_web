@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'loading-slips', loadChildren: () => import('./loading-slips/loading-slips.module').then(m => m.LoadingSlipsModule) },
   { path: 'entries', loadChildren: () => import('./entries/entries.module').then(m => m.EntriesModule) },
   { path: 'sheet', loadChildren: () => import('./sheet/sheet.module').then(m => m.SheetModule) },
+  { path: 'customer', loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule) },
 ];
 
 @NgModule({

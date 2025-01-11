@@ -6,7 +6,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SlipPreviewComponent } from '../../shared/slip-preview/slip-preview.component';
 import Swal from 'sweetalert2';
 import { CreateLoadingSlipComponent } from './create-loading-slip/create-loading-slip.component';
-import { ExportService } from '../../services/export.service';
+import { ExportService } from '../../services/import-export.service';
+import { ImportFileComponent } from '../../shared/import-file/import-file.component';
 
 @Component({
   selector: 'app-loading-slips',
@@ -62,7 +63,7 @@ export class LoadingSlipsComponent implements OnInit, OnDestroy {
   }
   createSlip(id = null) {
     const ref = this._model.open(CreateLoadingSlipComponent, {
-      size: 'lg',
+      size: 'xl',
     });
     ref.componentInstance.slipId = id;
     ref.componentInstance.action = id != null ? 'edit' : 'new';

@@ -6,7 +6,7 @@ import { takeWhile } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { LoaderComponent } from '../loader/loader.component';
-import { ExportService } from '../../services/export.service';
+import { ExportService } from '../../services/import-export.service';
 
 @Component({
   selector: 'app-slip-preview',

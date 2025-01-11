@@ -32,3 +32,26 @@
 .form-control:focus {
   box-shadow: none !important;
 }
+.filter-list {
+  ul {
+    display: block;
+    border: 0px;
+    padding: 10px;
+    li {
+      cursor: pointer;
+      height: 25px;
+      padding-left: 15px;
+      border-radius: 10px;
+    }
+    li:hover {
+      background-color: #ea5455ab;
+      color: white;
+    }
+    li.active {
+      background-color: #ea5455ab;
+    }
+  }
+}
+.filter-dropdown {
+  width: 100%;
+}

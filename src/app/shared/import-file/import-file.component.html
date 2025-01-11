@@ -1,0 +1,35 @@
+<div class="modal-content large-modal-content">
+    <div class="popup-header">
+        <div class="row">
+            <div class="col-md-10">
+                <h5 class="text-white">Import</h5>
+            </div>
+            <div class="col-md-2 text-end">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closePop()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="">Choose file <code>*</code></label>
+                        <input (change)="onUploadfile($event)" type="file" class="form-control"
+                            accept=".csv, .xlsx, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, text/csv">
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12 text-end">
+                    <button [disabled]="!file" class="btn theme-bg-color text-white" (click)="upload()">
+                        <i *ngIf="loader" class="bx bx-loader bx-spin font-size-18 align-middle me-2"></i> <span
+                            *ngIf="!loader">Upload</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

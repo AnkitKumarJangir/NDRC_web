@@ -16,13 +16,13 @@
             <app-loader *ngIf="loading"></app-loader>
             <form *ngIf="!loading" class="h-100" [formGroup]="loadingSlipForm">
                 <div class="row">
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="form-group">
                             <label for="">S.No.</label>
                             <input class="form-control" placeholder="S.No" formControlName="s_no" type="number" />
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="form-group">
                             <label for="">Date <code>*</code></label>
 
@@ -30,37 +30,40 @@
                         </div>
                     </div>
 
-                    <div class="col-12">
-                        <div class="form-group">
-                            <label for="">Party <code>*</code></label>
-                            <input class="form-control" placeholder="Party Name" type="text" formControlName="party" />
-                        </div>
-                    </div>
-                    <!-- <div class="col-12 d-flex"> -->
-                    <div class="col-6">
-                        <div class="form-group">
-                            <label for="">Address</label>
-                            <input class="form-control" placeholder="Address" type="text" formControlName="address" />
-                        </div>
-                    </div>
-
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="form-group">
                             <label for="">Trailor No. <code>*</code></label>
                             <input class="form-control" placeholder="Trailor No." formControlName="trailor_no"
                                 type="text" />
                         </div>
                     </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="">Customer <code>*</code></label>
+                            <!-- <input class="form-control" placeholder="Party Name" type="text" formControlName="party" /> -->
+                            <ng-select class="w-100" formControlName="customer" bindLabel="name" bindValue="_id"
+                                [loading]="ctLoader" [items]="customerList" placeholder="Select Customer"></ng-select>
+                        </div>
+                    </div>
+                    <!-- <div class="col-12 d-flex"> -->
+                    <div class="col-4">
+                        <div class="form-group">
+                            <label for="">Address</label>
+                            <input class="form-control" placeholder="Address" type="text" formControlName="address" />
+                        </div>
+                    </div>
+
+
                     <!-- </div> -->
                     <!-- <div class="col-12 d-flex"> -->
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="form-group">
                             <label for="">From <code>*</code></label>
                             <input class="form-control" placeholder="From" formControlName="from" type="text" />
                         </div>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="form-group">
                             <label for="">To <code>*</code></label>
                             <input class="form-control" placeholder="To" formControlName="to" type="text" />
@@ -74,14 +77,14 @@
                         </div>
                     </div>
                     <!-- <div class="col-12 d-flex"> -->
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="form-group">
                             <label for="">Freight <code>*</code></label>
                             <input class="form-control" placeholder="Freight" formControlName="freight" type="number" />
                         </div>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="form-group">
                             <label for="">P.M.T.</label>
                             <input class="form-control" formControlName="p_m_t" placeholder="PMT" type="text" />
@@ -89,14 +92,14 @@
                     </div>
                     <!-- </div> -->
                     <!-- <div class="col-12 d-flex"> -->
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="form-group">
                             <label for="">Fine</label>
                             <input class="form-control" placeholder="Fine" formControlName="fine" type="text" />
                         </div>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="form-group">
                             <label for="">Detain</label>
                             <input class="form-control" formControlName="detain" placeholder="Detain" type="text" />
@@ -141,14 +144,14 @@
                   </div> -->
                     <!-- </div> -->
                     <!-- <div class="col-12 d-flex"> -->
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="form-group">
                             <label for="">Weight <code>*</code></label>
                             <input class="form-control" placeholder="Weight" type="number" formControlName="weight" />
                         </div>
                     </div>
 
-                    <div class="col-6">
+                    <div class="col-4">
                         <div class="form-group">
                             <label for="">Guarantee</label>
                             <input class="form-control" placeholder="Guarantee" type="text"
@@ -165,6 +168,12 @@
                         <div class="form-group">
                             <label for="">Balance <code>*</code></label>
                             <input class="form-control" placeholder="Balance" formControlName="balance" type="number" />
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea rows="5" formControlName="description" class="form-control"></textarea>
                         </div>
                     </div>
                 </div>

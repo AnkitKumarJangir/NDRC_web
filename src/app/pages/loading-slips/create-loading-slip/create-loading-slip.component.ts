@@ -5,6 +5,7 @@ import { LoadingSlipsService } from '../../../services/loading-slips.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import moment from 'moment';
 import { takeWhile } from 'rxjs';
+import { CustomerService } from '../../../services/customer.service';
 
 @Component({
   selector: 'app-create-loading-slip',
@@ -16,12 +17,15 @@ export class CreateLoadingSlipComponent implements OnInit {
   @Input('slipId') slipId = null;
   @Input('action') action = 'new';
   loading = false;
+  ctLoader = false;
+  customerList = [];
   islive = true;
   loadingSlipForm!: FormGroup;
   today = moment().format('YYYY-MM-DD');
   constructor(
     public _activateModel: NgbActiveModal,
     private _toastr: ToastrService,
+    private _customer: CustomerService,
     private fb: FormBuilder,
     private _loadingslip: LoadingSlipsService
   ) {}
@@ -30,7 +34,7 @@ export class CreateLoadingSlipComponent implements OnInit {
     this.loadingSlipForm = this.fb.group({
       s_no: [null],
       date: [this.today, Validators.required],
-      party: [null, Validators.required],
+      customer: [null, Validators.required],
       address: [null],
       trailor_no: [null, Validators.required],
       from: [null, Validators.required],
@@ -46,16 +50,30 @@ export class CreateLoadingSlipComponent implements OnInit {
       h: [null, Validators.required],
       weight: [null, Validators.required],
       guarantee: [null],
+      description: [null],
       advance: [null, Validators.required],
       balance: [null, Validators.required],
     });
-    this.loadingSlipForm.get('date')?.disable();
+    // this.loadingSlipForm.get('date')?.disable();
     this.loadingSlipForm.get('s_no')?.disable();
     if (this.action == 'new') {
       this.getSerialNo();
     } else {
       this.getslip(this.slipId);
     }
+    this._customer
+      .getCustomers(null)
+      .pipe(takeWhile(() => this.islive))
+      .subscribe({
+        next: (value: any) => {
+          this.ctLoader = false;
+          this.customerList = value;
+        },
+        error: (err) => {
+          this.ctLoader = false;
+          this._toastr.error(err);
+        },
+      });
   }
 
   getslip(id) {
@@ -103,11 +121,9 @@ export class CreateLoadingSlipComponent implements OnInit {
   saveRating() {
     if (this.loadingSlipForm.valid) {
       this.loading = true;
-      this.loadingSlipForm.get('date')?.enable();
       this.loadingSlipForm.get('s_no')?.enable();
       const data = {
         ...this.loadingSlipForm.value,
-        party: this.loadingSlipForm.value.party.toLowerCase(),
         date: moment(this.loadingSlipForm.get('date').value).format(
           'DD-MM-yyyy'
         ),

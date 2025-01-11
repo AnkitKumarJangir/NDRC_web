@@ -36,6 +36,12 @@ export const MENU: any[] = [
     icon: 'bx bx-clipboard',
     link: '/sheet',
   },
+  {
+    id: 6,
+    label: 'Customers',
+    icon: 'bx bxs-user',
+    link: '/customer',
+  },
 ];
 
 //NOTE Last id is 205

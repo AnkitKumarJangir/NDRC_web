@@ -1,6 +1,6 @@
 <div class="filter-box mt-2">
     <div class="row">
-        <div class="col-8">
+        <div class="col-md-8 col-sm-12">
             <ul class="w-100" *ngIf="heads && heads?.length">
                 <ng-container *ngFor="let head of heads;let last = last">
                     <li [style.width.%]="100 / heads.length"
@@ -10,7 +10,7 @@
                 </ng-container>
             </ul>
         </div>
-        <div class="col-4 text-end">
+        <div class="col-md-4 col-sm-12 text-end">
             <button class="btn btn-sm theme-bg-color text-white" (click)="applyfilter()">
                 <i class="fas fa-search"></i> Search
             </button>
@@ -44,6 +44,22 @@
                         (click)="dateRange(type)">{{ type.name }}</span>
                 </div>
             </form>
+        </div>
+    </div>
+</ng-template>
+<ng-template #Customer>
+    <div ngbDropdown class="tab-menu">
+        <button id="dropdownForm121w1" ngbDropdownToggle>Customer</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownForm121w1" class="filter-dropdown">
+            <div class="filter-list">
+                <ngx-simplebar [style.height.px]="200">
+                    <Ul>
+                        <li [class.active]="customerList[i]['checked'] == true" (click)="selectId(customerList,i)"
+                            *ngFor="let item of customerList;let i =index">
+                            {{item.name}}</li>
+                    </Ul>
+                </ngx-simplebar>
+            </div>
         </div>
     </div>
 </ng-template>

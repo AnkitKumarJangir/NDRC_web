@@ -37,3 +37,15 @@
 .cp {
   cursor: pointer;
 }
+
+// form
+.form-control:focus {
+  box-shadow: none !important;
+}
+
+input.ng-invalid.ng-touched {
+  border: 1px solid #ea1717;
+}
+select.ng-invalid.ng-touched {
+  border: 1px solid #ea1717;
+}

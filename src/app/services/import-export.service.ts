@@ -1,9 +1,12 @@
 import { Injectable } from '@angular/core';
 import { saveAs } from 'file-saver';
+import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class ExportService {
+  files = new BehaviorSubject<File>(null);
+  uploading = new BehaviorSubject<boolean>(false);
   constructor() {}
 
   saveAsFile(buffer: any, fileName: string, fileType: string): void {

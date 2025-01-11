@@ -1,10 +1,10 @@
 <div class="card">
     <div class="card-body">
         <div class="row">
-            <div class="col-6">
+            <div class="col-6 pe-0">
                 <h5>Loading Slips</h5>
             </div>
-            <div class="col-6 text-end">
+            <div class="col-6 ps-0 text-end">
                 <button class="btn btn-sm btn-rounded btn-outline-primary" (click)="createSlip()"><i
                         class="fas fa-plus"></i> Add</button>
                 <button class="btn btn-sm btn-rounded btn-outline-info" (click)="export()"><i
@@ -17,7 +17,7 @@
 </div>
 <div class="card">
     <div class="card-body">
-        <app-filter-box [filterList]="['DateRange','SearchText']"
+        <app-filter-box [filterList]="['DateRange','Customer','SearchText']"
             (filterApplied)="filterApplied($event)"></app-filter-box>
         <app-loader *ngIf="loader"></app-loader>
         <div class="table-responsive" *ngIf="!loader">
@@ -25,7 +25,7 @@
                 <thead>
                     <th>S.No</th>
                     <th>Date</th>
-                    <th>Party</th>
+                    <th>Client</th>
                     <th>Trailor No</th>
                     <th>From</th>
                     <th>To</th>
@@ -42,7 +42,7 @@
                     <tr *ngFor="let item of slipList;let i = index">
                         <td>{{item?.s_no}}</td>
                         <td>{{item?.date}}</td>
-                        <td>{{item?.party}}</td>
+                        <td>{{item?.customer?.name | titlecase}}</td>
                         <td>{{item?.trailor_no?.toUpperCase()}}</td>
                         <td>{{item?.from}}</td>
                         <td>{{item?.to}}</td>

@@ -9,7 +9,7 @@ import { CreateLoadingSlipComponent } from './create-loading-slip/create-loading
 import { ReactiveFormsModule } from '@angular/forms';
 import { PaginationComponent } from '../../shared/pagination/pagination.component';
 import { FilterBoxComponent } from '../../shared/filter-box/filter-box.component';
-
+import { NgSelectModule } from '@ng-select/ng-select';
 @NgModule({
   declarations: [LoadingSlipsComponent, CreateLoadingSlipComponent],
   imports: [
@@ -17,6 +17,7 @@ import { FilterBoxComponent } from '../../shared/filter-box/filter-box.component
     ReactiveFormsModule,
     LoaderComponent,
     NgbModule,
+    NgSelectModule,
     FilterBoxComponent,
     LoadingSlipsRoutingModule,
     PaginationComponent,
