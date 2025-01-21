@@ -1,5 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
-
+body{
+  background-color: #f2edf3 !important
+}
 // theme color
 .theme-color {
   color: #ea5455 !important;
@@ -48,4 +50,44 @@ input.ng-invalid.ng-touched {
 }
 select.ng-invalid.ng-touched {
   border: 1px solid #ea1717;
+}
+
+.card-img-absolute{
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+}
+.bg-gradient-danger {
+  background: linear-gradient(to right, #ffbf96, #fe7096) !important;
+}
+.bg-gradient-info {
+  background: linear-gradient(to right, #90caf9, #047edf 99%) !important;
+}
+.bg-gradient-success {
+  background: linear-gradient(to right, #84d9d2, #07cdae) !important;
+}
+.btn-primary{
+  border: 0px !important;
+  background: linear-gradient(to right, #da8cff, #9a55ff) !important;
+}
+.btn-danger{
+  background: linear-gradient(to right, #ffbf96, #fe7096) !important;
+  border: 0px !important;
+}
+.btn-success {
+  background: linear-gradient(to right, #84d9d2, #07cdae) !important;
+  border: 0px !important;
+}
+.btn-info {
+  background: linear-gradient(to right, #90caf9, #047edf 99%) !important;
+  border: 0px !important;
+}
+.btn-info {
+  background: linear-gradient(to right, #90caf9, #047edf 99%) !important;
+  border: 0px !important;
+}
+.btn-warning {
+  background: linear-gradient(to right, #f6e384, #ffd500) !important;
+  border: 0px !important;
 }

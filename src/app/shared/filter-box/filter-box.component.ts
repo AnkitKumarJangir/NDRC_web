@@ -17,6 +17,7 @@ import { CustomerService } from '../../services/customer.service';
 import { takeWhile } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { SimplebarAngularModule } from 'simplebar-angular';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @Component({
   selector: 'app-filter-box',
@@ -25,6 +26,7 @@ import { SimplebarAngularModule } from 'simplebar-angular';
     CommonModule,
     FormsModule,
     SimplebarAngularModule,
+    NgSelectModule,
     NgbDropdownModule,
   ],
   templateUrl: './filter-box.component.html',
@@ -43,6 +45,7 @@ export class FilterBoxComponent implements OnInit, OnDestroy {
   search = '';
   datePiker = [...datePatchTypes];
   customerList: any[];
+  temSetData:any = [];
   constructor(
     private _customer: CustomerService,
     private _toastr: ToastrService
@@ -55,6 +58,12 @@ export class FilterBoxComponent implements OnInit, OnDestroy {
     return (this as any)[head];
   }
   dateRange(type) {
+    if(type == undefined){
+      this.start_date = null;
+      this.end_date = null;
+      return;
+    }
+    
     const start = moment().clone().subtract(type.start, type.subtractType);
     const end = moment().clone().subtract(type.end, type.subtractType);
     this.start_date =
@@ -67,7 +76,6 @@ export class FilterBoxComponent implements OnInit, OnDestroy {
         : end.format('YYYY-MM-DD');
   }
   applyfilter() {
-    console.log(this.customerList.find((d) => d.checked));
 
     const payload = {
       ...(this.search && {
@@ -93,6 +101,9 @@ export class FilterBoxComponent implements OnInit, OnDestroy {
         .subscribe({
           next: (value: any) => {
             this.customerList = value;
+            this.temSetData = JSON.parse(JSON.stringify(value))
+            console.log(this.temSetData);
+            
           },
           error: (err) => {
             this._toastr.error(err);
@@ -103,6 +114,16 @@ export class FilterBoxComponent implements OnInit, OnDestroy {
     const [list, index] = args;
     list.map((d, i) => i != index && (d.checked = false));
     list[index].checked = !list[index].checked;
+  }
+  searchText($event){
+    const val = $event.target.value.toLowerCase();
+    const temp = this.temSetData.filter((d)=>{
+      return val === '' || d.name.toLowerCase().includes(val); 
+    })
+    // this.temSetData = temp
+    console.log(temp);
+    this.customerList = temp
+    
   }
   reset() {
     this.search = '';

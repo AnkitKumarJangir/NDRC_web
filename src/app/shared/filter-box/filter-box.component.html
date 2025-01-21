@@ -28,21 +28,24 @@
         <button id="dropdownForm121w1" ngbDropdownToggle>Date Range</button>
         <div ngbDropdownMenu aria-labelledby="dropdownForm121w1" class="filter-dropdown">
             <form class="p-2">
+                <ng-select class="w-100" placeholder="Patch Date" (change)="dateRange($event)" [items]="datePiker" bindLabel="name">
+
+                </ng-select>
                 <div class="custom-checkbox">
-                    <label for="">Start Date:</label>
+                    <label for="">From</label>
                     <input type="date" class="form-control form-control-sm" [(ngModel)]="start_date"
                         [ngModelOptions]="{ standalone: true }" />
                 </div>
                 <div class="custom-checkbox mt-1">
-                    <label for="">End Date:</label>
+                    <label for="">To</label>
                     <input type="date" class="form-control form-control-sm" [(ngModel)]="end_date"
                         [ngModelOptions]="{ standalone: true }" />
                 </div>
-                <div class="col-12 mt-4 text-center">
+                <!-- <div class="col-12 mt-4 text-center">
                     <span *ngFor="let type of datePiker"
                         class="badge rounded-pill bg-{{ type.colorCode }}  ms-1 showPointer"
                         (click)="dateRange(type)">{{ type.name }}</span>
-                </div>
+                </div> -->
             </form>
         </div>
     </div>
@@ -52,11 +55,19 @@
         <button id="dropdownForm121w1" ngbDropdownToggle>Customer</button>
         <div ngbDropdownMenu aria-labelledby="dropdownForm121w1" class="filter-dropdown">
             <div class="filter-list">
+                <div>
+                    <input type="text" (keyup)="searchText($event)" placeholder="search" class="form-control"/>
+                </div>
+                <hr class="m-0">
                 <ngx-simplebar [style.height.px]="200">
                     <Ul>
                         <li [class.active]="customerList[i]['checked'] == true" (click)="selectId(customerList,i)"
                             *ngFor="let item of customerList;let i =index">
-                            {{item.name}}</li>
+                            <div class="d-flex align-items-center justify-content-between">
+                                {{item.name}}
+                                 <div class="me-3" *ngIf="customerList[i]['checked'] == true"> <i class="fas text-white fa-check"></i></div>
+                                </div>
+                            </li>
                     </Ul>
                 </ngx-simplebar>
             </div>
