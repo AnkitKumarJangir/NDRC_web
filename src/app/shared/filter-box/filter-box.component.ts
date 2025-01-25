@@ -44,7 +44,7 @@ export class FilterBoxComponent implements OnInit, OnDestroy {
   end_date;
   search = '';
   datePiker = [...datePatchTypes];
-  customerList: any[];
+  customerList: any[] =[]
   temSetData:any = [];
   constructor(
     private _customer: CustomerService,
@@ -76,7 +76,7 @@ export class FilterBoxComponent implements OnInit, OnDestroy {
         : end.format('YYYY-MM-DD');
   }
   applyfilter() {
-
+    let isCustomerSelected  = this.customerList.some((d) => d.checked)
     const payload = {
       ...(this.search && {
         search: this.search.trim(),
@@ -87,7 +87,7 @@ export class FilterBoxComponent implements OnInit, OnDestroy {
       ...(this.end_date && {
         end_date: this.end_date,
       }),
-      ...(this.customerList.find((d) => d.checked) && {
+      ...(this.heads.includes('Customer') && isCustomerSelected && {
         customer: this.customerList.find((d) => d.checked)._id,
       }),
     };
@@ -101,9 +101,7 @@ export class FilterBoxComponent implements OnInit, OnDestroy {
         .subscribe({
           next: (value: any) => {
             this.customerList = value;
-            this.temSetData = JSON.parse(JSON.stringify(value))
-            console.log(this.temSetData);
-            
+            this.temSetData = JSON.parse(JSON.stringify(value))            
           },
           error: (err) => {
             this._toastr.error(err);
@@ -120,10 +118,7 @@ export class FilterBoxComponent implements OnInit, OnDestroy {
     const temp = this.temSetData.filter((d)=>{
       return val === '' || d.name.toLowerCase().includes(val); 
     })
-    // this.temSetData = temp
-    console.log(temp);
     this.customerList = temp
-    
   }
   reset() {
     this.search = '';

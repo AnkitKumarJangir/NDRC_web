@@ -1,1 +1,93 @@
-<p>entries works!</p>
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-6 pe-0">
+                <h5>Entries Book</h5>
+            </div>
+            <div class="col-6 ps-0 text-end">
+                <button class="btn btn-sm btn-rounded btn-primary" (click)="createEntries()"><i
+                        class="fas fa-plus"></i> Add</button>
+                <button class="btn btn-sm btn-rounded btn-info" (click)="export()"><i
+                        class="fas fa-cloud-download-alt"></i>
+                    Export</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="card">
+    <div class="card-body">
+        <app-filter-box [filterList]="['DateRange','Customer','SearchText']"
+            (filterApplied)="filterApplied($event)"></app-filter-box>
+        <app-loader *ngIf="loader"></app-loader>
+        <div class="table-responsive" *ngIf="!loader">
+            <table class="table table-bordered">
+                <thead>
+                    <th>S.No</th>
+                    <th>Date</th>
+                    <th>Customer</th>
+                    <th>Loading Date</th>
+                    <th>Vehicle</th>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Size (length, width, height) ft.</th>
+                    <th>weight (MT)</th>
+                    <th>Freight</th>
+                    <th>Advance</th>
+                    <th>Balance</th>
+                    <th>Bill Amt.</th>
+                    <th>Amt. Recd</th>
+                    <th>Commission</th>
+                    <th>Sheet No.</th>
+                    <th>Remarks</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let item of slipList;let i = index">
+                    
+                    <tr >
+                        <td>{{i+1}}</td>
+                        <td>{{item?.date | date:"dd-MM-yyyy"}}</td>
+                        <td>{{item?.loading_id?.customer?.name}}</td>
+                        <td>{{item?.loading_id?.date }}</td>
+                        <td>{{item?.loading_id?.trailor_no?.toUpperCase()}}</td>
+                        <td>{{item?.loading_id?.from}}</td>
+                        <td>{{item?.loading_id?.to}}</td>
+                        <td>{{item?.loading_id?.l}}, {{item?.loading_id?.w}}, {{item?.loading_id?.h}}</td>
+                        <td>{{item?.loading_id?.weight}}</td>
+                        <td>{{item?.loading_id?.freight?.toLocaleString('en')}}</td>
+                        <td>{{item?.loading_id?.advance?.toLocaleString('en')}}</td>
+                        <td>{{item?.loading_id?.balance?.toLocaleString('en')}}</td>
+                        <td>{{item?.bill_amount?.toLocaleString('en')}}</td>
+                        <td>{{item?.amount_recd?.toLocaleString('en')}}</td>
+                        <td>{{item?.commission?.toLocaleString('en')}}</td>
+                        <td class="text-danger">
+                            <spna *ngIf="item?.sheet_no">{{item?.sheet_no?.toLocaleString('en')}}</spna>
+                            <spna *ngIf="!item?.sheet_no"><a class="btn-link cp"><i title="Create Sheet" class="fas fa-plus"></i></a></spna>
+
+                        </td>
+                        <td>{{item?.remarks?.toLocaleString('en')}}</td>
+
+
+                        <td>
+                         
+                            <a class="cp text-info ms-2" (click)="createEntries(item)"><i
+                                    class="fas fa-pen font-size-16"></i></a>
+
+                            <a class="cp text-danger ms-2" (click)="deleteEntires(item?._id)"><i
+                                    class="fas fa-trash-alt font-size-16"></i></a>
+                                                  </td>
+                    </tr>
+               
+                </ng-container>
+                <tr *ngIf="slipList.length == 0">
+                    <td colspan="100%" class="text-center">No Data Available!</td>
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+        <app-pagination (loading)="loader = $event" (paginatedData)="setData($event)" [next]="pagination?.next"
+            [previous]="pagination?.previous"></app-pagination>
+    </div>
+</div>

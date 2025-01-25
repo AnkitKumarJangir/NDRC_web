@@ -3,9 +3,10 @@
     align-items: baseline;
   }
   ul {
-    padding: 0px 25px;
+    padding: 0 25px;
+    box-shadow: 1px 1px 5px 2px #bdbdbd44;
     display: flex;
-    border: 1px solid lightgray;
+    // border: 1px solid lightgray;
     border-radius: 28px;
     align-items: center;
     li {

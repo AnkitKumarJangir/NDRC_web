@@ -44,6 +44,9 @@
                             <ng-select class="w-100" formControlName="customer" bindLabel="name" bindValue="_id"
                                 [loading]="ctLoader" [items]="customerList" placeholder="Select Customer"></ng-select>
                         </div>
+                        <div>
+                            <a class="btn-link cp"(click)="createCustomer()">+ Add Customer</a>
+                        </div>
                     </div>
                     <!-- <div class="col-12 d-flex"> -->
                     <div class="col-4">

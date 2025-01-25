@@ -8,6 +8,7 @@ import Swal from 'sweetalert2';
 import { CreateLoadingSlipComponent } from './create-loading-slip/create-loading-slip.component';
 import { ExportService } from '../../services/import-export.service';
 import { ImportFileComponent } from '../../shared/import-file/import-file.component';
+import { CreateEntriesComponent } from '../../shared/create-entries/create-entries.component';
 
 @Component({
   selector: 'app-loading-slips',
@@ -73,7 +74,12 @@ export class LoadingSlipsComponent implements OnInit, OnDestroy {
       }
     });
   }
-
+  createEntries(id = null) {
+    const ref = this._model.open(CreateEntriesComponent, {
+      size: 'xl',
+    });
+    ref.componentInstance.loadingId = id
+  }
   deleteSlip(id) {
     Swal.fire({
       title: 'Are you sure?',

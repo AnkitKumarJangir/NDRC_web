@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { LoadingSlipsService } from '../../../services/loading-slips.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import moment from 'moment';
 import { takeWhile } from 'rxjs';
 import { CustomerService } from '../../../services/customer.service';
+import { CreateCustomerComponent } from '../../../shared/create-customer/create-customer.component';
 
 @Component({
   selector: 'app-create-loading-slip',
@@ -27,6 +28,7 @@ export class CreateLoadingSlipComponent implements OnInit {
     private _toastr: ToastrService,
     private _customer: CustomerService,
     private fb: FormBuilder,
+    private _model:NgbModal,
     private _loadingslip: LoadingSlipsService
   ) {}
 
@@ -61,21 +63,36 @@ export class CreateLoadingSlipComponent implements OnInit {
     } else {
       this.getslip(this.slipId);
     }
-    this._customer
-      .getCustomers(null)
-      .pipe(takeWhile(() => this.islive))
-      .subscribe({
-        next: (value: any) => {
-          this.ctLoader = false;
-          this.customerList = value;
-        },
-        error: (err) => {
-          this.ctLoader = false;
-          this._toastr.error(err);
-        },
-      });
+    this.loadCustomer()
+    
   }
-
+  loadCustomer(){
+    this._customer
+    .getCustomers(null)
+    .pipe(takeWhile(() => this.islive))
+    .subscribe({
+      next: (value: any) => {
+        this.ctLoader = false;
+        this.customerList = value;
+      },
+      error: (err) => {
+        this.ctLoader = false;
+        this._toastr.error(err);
+      },
+    });
+  }
+ createCustomer(id = null) {
+    const ref = this._model.open(CreateCustomerComponent, {
+      size: 'lg',
+    });
+    ref.componentInstance.customerId = id;
+    ref.componentInstance.action = id != null ? 'edit' : 'new';
+    ref.result.then((m) => {
+      if (m.reload) {
+        this.loadCustomer();
+      }
+    });
+  }
   getslip(id) {
     this.loading = true;
     this._loadingslip
