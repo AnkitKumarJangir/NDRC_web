@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PageNotFoundComponent } from '../extra-pages/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
@@ -12,6 +13,10 @@ const routes: Routes = [
   { path: 'entries', loadChildren: () => import('./entries/entries.module').then(m => m.EntriesModule) },
   { path: 'sheet', loadChildren: () => import('./sheet/sheet.module').then(m => m.SheetModule) },
   { path: 'customer', loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule) },
+    {
+      path: '**',
+      component: PageNotFoundComponent,
+    },
 ];
 
 @NgModule({
