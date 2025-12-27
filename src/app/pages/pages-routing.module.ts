@@ -8,7 +8,6 @@ const routes: Routes = [
     loadChildren: () =>
       import('./dashboard/dashboard.module').then((m) => m.DashboardModule),
   },
-  { path: 'calendar', loadChildren: () => import('./calendar/calendar.module').then(m => m.CalendarModule) },
   { path: 'loading-slips', loadChildren: () => import('./loading-slips/loading-slips.module').then(m => m.LoadingSlipsModule) },
   { path: 'entries', loadChildren: () => import('./entries/entries.module').then(m => m.EntriesModule) },
   { path: 'sheet', loadChildren: () => import('./sheet/sheet.module').then(m => m.SheetModule) },

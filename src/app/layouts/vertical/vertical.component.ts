@@ -27,7 +27,6 @@ import { RightsidebarComponent } from '../rightsidebar/rightsidebar.component';
  * Vertical component
  */
 export class VerticalComponent implements OnInit, AfterViewInit {
-  isCondensed = false;
   sidebartype: string;
 
   constructor(private router: Router, private eventService: EventService) {
@@ -126,7 +125,6 @@ export class VerticalComponent implements OnInit, AfterViewInit {
    * On mobile toggle button clicked
    */
   onToggleMobileMenu() {
-    // this.isCondensed = !this.isCondensed;
     document.body.classList.toggle('sidebar-enable');
     document.body.classList.toggle('vertical-collpsed');
 

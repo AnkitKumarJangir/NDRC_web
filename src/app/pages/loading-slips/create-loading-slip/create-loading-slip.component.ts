@@ -106,6 +106,7 @@ export class CreateLoadingSlipComponent implements OnInit {
 
             this.loadingSlipForm.patchValue({
               ...res,
+              customer:res?.customer?._id ?? null,
               date: moment(date).clone().format('YYYY-MM-DD'),
             });
           }

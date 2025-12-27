@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 
 import { LAYOUT_WIDTH, SIDEBAR_TYPE, TOPBAR } from '../layouts.model';
 import { EventService } from '../../core/service/event.service';
-import { ClickOutsideModule } from 'ng-click-outside';
 import { SimplebarAngularModule } from 'simplebar-angular';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-rightsidebar',
   standalone: true,
-  imports: [ClickOutsideModule, CommonModule, SimplebarAngularModule],
+  imports: [CommonModule, SimplebarAngularModule],
 
   templateUrl: './rightsidebar.component.html',
   styleUrls: ['./rightsidebar.component.scss'],
