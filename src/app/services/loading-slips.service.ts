@@ -15,6 +15,10 @@ export class LoadingSlipsService {
     let url = '/loadingslips/get-loading-slips-serial-no';
     return this.httpClient.get(this.helperService.api(url));
   }
+  getDashboard() {
+    let url = '/loadingslips/dashboard';
+    return this.httpClient.get(this.helperService.api(url));
+  }
   getLoadingSlips(filter: any, isExport = false) {
     let url = '/loadingslips/get-loading-slips';
     if (filter != null) {

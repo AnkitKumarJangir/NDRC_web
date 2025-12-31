@@ -54,7 +54,7 @@ export class LoadingSlipsComponent implements OnInit, OnDestroy {
   }
   setData(value) {
     this.pagination = value;
-    this.slipList = value.results;
+    this.slipList = value.results?.sort((a,b)=> b.s_no - a.s_no);
   }
   viewSlip(id) {
     const ref = this._model.open(SlipPreviewComponent, {
