@@ -2,58 +2,72 @@
   .row {
     align-items: baseline;
   }
+
   ul {
     padding: 0 0px;
     box-shadow: 1px 1px 5px 2px #bdbdbd44;
     display: flex;
     // border: 1px solid lightgray;
-    border-radius: 28px;
+    // border-radius: 28px;
     align-items: center;
+
     li {
       list-style: none;
     }
+
     button {
-      background: transparent;
+      background: #ffffff;
       border: 0px solid lightgray;
       padding: 5px 20px;
       width: 100%;
     }
+
     button::after {
       content: "";
       display: none;
     }
+
     .dropdown-menu {
       border: 0px;
     }
   }
 }
+
 .form-control {
-  border: 0px !important;
+    height: 34px;
+    border: 0px !important;
+    border-radius: 0px;
 }
+
 .form-control:focus {
   box-shadow: none !important;
 }
+
 .filter-list {
   ul {
     display: block;
     border: 0px;
     padding: 10px;
     border-radius: 0px;
+
     li {
       cursor: pointer;
       height: 25px;
       padding-left: 15px;
       border-radius: 10px;
     }
+
     li:hover {
       background-color: #ea5455ab;
       color: white;
     }
+
     li.active {
       background-color: #ea5455eb;
     }
   }
 }
+
 .filter-dropdown {
   width: 100%;
 }

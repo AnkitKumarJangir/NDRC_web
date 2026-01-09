@@ -15,7 +15,7 @@
         <div class="card-body">
             <app-loader *ngIf="loading"></app-loader>
             <form *ngIf="!loading" class="h-100" [formGroup]="entriesForm">
-                <div class="row">
+                <div class="row g-3">
                     <div class="col-12" *ngIf="!loadingId">
                         <div class="form-group">
                             <label for="">Loading Slip <code>*</code></label>
@@ -27,14 +27,6 @@
                             </ng-select>
                         </div>
                     </div>
-                    
-                    <!-- <div class="col-6">
-                        <div class="form-group">
-                            <label for="">Sheet No.</label>
-                            <input class="form-control" placeholder="sheet no." type="text"
-                                formControlName="sheet_no" />
-                        </div>
-                    </div> -->
                     <div class="col-4">
                         <div class="form-group">
                             <label for="">Bill Amount</label>

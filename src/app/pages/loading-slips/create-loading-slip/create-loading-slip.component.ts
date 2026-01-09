@@ -28,9 +28,9 @@ export class CreateLoadingSlipComponent implements OnInit {
     private _toastr: ToastrService,
     private _customer: CustomerService,
     private fb: FormBuilder,
-    private _model:NgbModal,
+    private _model: NgbModal,
     private _loadingslip: LoadingSlipsService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadingSlipForm = this.fb.group({
@@ -58,30 +58,31 @@ export class CreateLoadingSlipComponent implements OnInit {
     });
     // this.loadingSlipForm.get('date')?.disable();
     this.loadingSlipForm.get('s_no')?.disable();
+    this.loadingSlipForm.get('balance')?.disable();
     if (this.action == 'new') {
       this.getSerialNo();
     } else {
       this.getslip(this.slipId);
     }
     this.loadCustomer()
-    
+
   }
-  loadCustomer(){
+  loadCustomer() {
     this._customer
-    .getCustomers(null)
-    .pipe(takeWhile(() => this.islive))
-    .subscribe({
-      next: (value: any) => {
-        this.ctLoader = false;
-        this.customerList = value;
-      },
-      error: (err) => {
-        this.ctLoader = false;
-        this._toastr.error(err);
-      },
-    });
+      .getCustomers(null)
+      .pipe(takeWhile(() => this.islive))
+      .subscribe({
+        next: (value: any) => {
+          this.ctLoader = false;
+          this.customerList = value;
+        },
+        error: (err) => {
+          this.ctLoader = false;
+          this._toastr.error(err);
+        },
+      });
   }
- createCustomer(id = null) {
+  createCustomer(id = null) {
     const ref = this._model.open(CreateCustomerComponent, {
       size: 'lg',
     });
@@ -106,7 +107,7 @@ export class CreateLoadingSlipComponent implements OnInit {
 
             this.loadingSlipForm.patchValue({
               ...res,
-              customer:res?.customer?._id ?? null,
+              customer: res?.customer?._id ?? null,
               date: moment(date).clone().format('YYYY-MM-DD'),
             });
           }
@@ -139,9 +140,8 @@ export class CreateLoadingSlipComponent implements OnInit {
   saveRating() {
     if (this.loadingSlipForm.valid) {
       this.loading = true;
-      this.loadingSlipForm.get('s_no')?.enable();
       const data = {
-        ...this.loadingSlipForm.value,
+        ...this.loadingSlipForm.getRawValue(),
         date: moment(this.loadingSlipForm.get('date').value).format(
           'DD-MM-yyyy'
         ),
@@ -181,17 +181,19 @@ export class CreateLoadingSlipComponent implements OnInit {
     }
   }
   calculateBal() {
-    let adv = this.loadingSlipForm.get('advance')?.value;
-    let freight = this.loadingSlipForm.get('freight')?.value;
-    if (adv && freight) {
-      if (adv == freight || adv > freight) {
-        this.loadingSlipForm.get('balance')?.setValue('0.00');
-      }
-      if (freight > adv) {
-        const bal = freight - adv;
-        this.loadingSlipForm.get('balance')?.setValue(bal);
-      }
+    const adv = Number(this.loadingSlipForm.get('advance')?.value) || 0;
+    const freight = Number(this.loadingSlipForm.get('freight')?.value) || 0;
+    const detain = Number(this.loadingSlipForm.get('detain')?.value) || 0;
+
+    let balance = freight - adv + detain;
+
+    if (balance < 0) {
+      balance = 0;
     }
+
+    this.loadingSlipForm.get('balance')?.setValue(balance.toFixed(2), {
+      emitEvent: false
+    });
   }
   closePop(filter = null) {
     this._activateModel.close(filter);

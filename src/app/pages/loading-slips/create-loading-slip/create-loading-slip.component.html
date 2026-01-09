@@ -81,7 +81,7 @@
                     <div class="col-sm-4 col-md-4 col-6">
                         <div class="form-group">
                             <label for="">Freight <code>*</code></label>
-                            <input class="form-control" placeholder="Freight" formControlName="freight" type="number" />
+                            <input class="form-control" placeholder="Freight" (keyup)="calculateBal()" formControlName="freight" type="number" />
                         </div>
                     </div>
 
@@ -103,7 +103,7 @@
                     <div class="col-sm-4 col-md-4 col-6">
                         <div class="form-group">
                             <label for="">Detain</label>
-                            <input class="form-control" formControlName="detain" placeholder="Detain" type="text" />
+                            <input class="form-control" formControlName="detain"(keyup)="calculateBal()" placeholder="Detain" type="number" />
                         </div>
                     </div>
                     <!-- </div> -->

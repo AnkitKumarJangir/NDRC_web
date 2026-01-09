@@ -11,8 +11,16 @@ export class CompanyService {
     private helperService: HelperService
   ) {}
 
+  createCompany(payload) {
+    let url = '/company/create-franchise';
+    return this.httpClient.post(this.helperService.api(url),payload);
+  }
   getCompany() {
     let url = '/company/get-franchise-details';
+    return this.httpClient.get(this.helperService.api(url));
+  }
+  getSingleCompayDetails(id) {
+    let url = '/company/get-single-franchise/'+id;
     return this.httpClient.get(this.helperService.api(url));
   }
   updateCompany(payload: any) {

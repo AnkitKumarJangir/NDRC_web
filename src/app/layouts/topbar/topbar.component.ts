@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { DOCUMENT } from '@angular/common';
 
 import { CookieService } from 'ngx-cookie-service';
@@ -10,7 +10,7 @@ import { HelperService } from '../../services/helper.service';
 @Component({
   selector: 'app-topbar',
   standalone: true,
-  imports: [NgbDropdownModule],
+  imports: [NgbDropdownModule, RouterLink],
   templateUrl: './topbar.component.html',
   styleUrls: ['./topbar.component.scss'],
 })

@@ -13,6 +13,9 @@ const routes: Routes = [
   { path: 'entries', loadChildren: () => import('./entries/entries.module').then(m => m.EntriesModule) },
   { path: 'sheet', loadChildren: () => import('./sheet/sheet.module').then(m => m.SheetModule) },
   { path: 'customer', loadChildren: () => import('./customer/customer.module').then(m => m.CustomerModule) },
+  { path: 'profile', loadComponent: () => import('./profile/profile.component').then(m => m.ProfileComponent) },
+  { path: 'setting', loadComponent: () => import('./setting/setting.component').then(m => m.SettingComponent) },
+  { path: 'subscription', loadComponent: () => import('./subscription/subscription.component').then(m => m.SubscriptionComponent) },
     {
       path: '**',
       component: PageNotFoundComponent,

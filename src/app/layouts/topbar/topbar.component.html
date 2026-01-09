@@ -20,7 +20,7 @@
     </div>
 
     <div class="d-flex">
-      <div class="dropdown d-inline-block" ngbDropdown>
+      <div class="dropdown d-inline-block border-0" ngbDropdown>
         <button type="button" class="btn header-item" ngbDropdownToggle id="page-header-user-dropdown">
 
           <img class="rounded-circle header-profile-user" [src]="
@@ -29,12 +29,15 @@
           <span class="d-none d-xl-inline-block ms-1">{{ currentUser?.first_name }}&nbsp;{{ currentUser?.last_name
             }}</span>
         </button>
-        <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+        <div class="dropdown-menu dropdown-menu-end border-0" ngbDropdownMenu>
           <!-- item-->
-          <a class="dropdown-item"><i class="bx bx-user font-size-16 align-middle me-1"></i>
+          <a class="dropdown-item cp" [routerLink]="'/profile'"><i class="bx bx-user font-size-16 align-middle me-1"></i>
             {{ "Profile" }}</a>
+          <a class="dropdown-item cp"[routerLink]="'/setting'"><i class="bx bx-cog bx-spin font-size-16 align-middle me-1"></i>
+            {{ "Setting" }}</a>
+          <a class="dropdown-item cp"[routerLink]="'/subscription'"><i class="bx bx-credit-card font-size-16 align-middle me-1"></i>
+            {{ "Subscription" }}</a>
 
-          <div class="dropdown-divider"></div>
           <a class="dropdown-item text-danger" href="javascript: void(0);" (click)="logout()"><i
               class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i>
             {{ "Logout" }}</a>

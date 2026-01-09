@@ -15,34 +15,39 @@
 
     </div>
 </div>
+<app-filter-box [filterList]="['DateRange','Customer','SearchText']"
+            (filterApplied)="filterApplied($event)"></app-filter-box>
 <div class="card">
     <div class="card-body">
-        <app-filter-box [filterList]="['DateRange','Customer','SearchText']"
-            (filterApplied)="filterApplied($event)"></app-filter-box>
+        
         <app-loader *ngIf="loader"></app-loader>
         <div class="table-responsive" *ngIf="!loader">
             <table class="table table-sm  table-boarderd">
                 <thead>
-                    <th></th>
-                    <th>S.No</th>
-                    <th>Date</th>
-                    <th>Client</th>
-                    <th>Trailor No</th>
-                    <th>From</th>
-                    <th>To</th>
-                    <th>Freight</th>
-                    <th>Fine</th>
-                    <th>Detain</th>
-                    <th>Size (length, width, height)</th>
-                    <th>weight / Guarantee (MT)</th>
-                    <th>Advance</th>
-                    <th>Balance</th>
-                    <th>Action</th>
+                    <tr class="text-center">
+                        <th></th>
+                        <th>S.No</th>
+                        <th>Date</th>
+                        <th>Party</th>
+                        <th>Trailor No</th>
+                        <th>From</th>
+                        <th>To</th>
+                        <th>Freight</th>
+                        <th>Fine</th>
+                        <th>Detain</th>
+                        <th>Size (length, width, height)</th>
+                        <th>weight (MT)</th>
+                        <th>Guarantee (MT)</th>
+                        <th>Advance</th>
+                        <th>Balance</th>
+                        <th>Action</th>
+
+                    </tr>
                 </thead>
                 <tbody>
                     <ng-container *ngFor="let item of slipList;let i = index">
 
-                        <tr>
+                        <tr  class="text-center">
                             <td class="text-center">
                                 <a class="cp" (click)="item.expend = !item.expend"><i class="fas"
                                         [ngClass]="{'fa-plus':!item.expend,'fa-minus':item.expend,}"></i></a>
@@ -54,14 +59,15 @@
                             <td>{{item?.from}}</td>
                             <td>{{item?.to}}</td>
                             <td>{{item?.freight?.toLocaleString('en')}}</td>
-                            <td>{{item?.fine}}</td>
-                            <td>{{item?.detain}}</td>
+                            <td>{{item?.fine ?? 'NA'}}</td>
+                            <td>{{item?.detain ?? 'NA'}}</td>
                             <td>{{item?.l}}, {{item?.w}}, {{item?.h}}</td>
-                            <td>{{item?.weight}} / {{item?.guarantee}}</td>
+                            <td>{{item?.weight}}</td>
+                            <td>{{item?.guarantee ?? 'NA'}}</td>
                             <td>{{item?.advance?.toLocaleString('en')}}</td>
                             <td>{{item?.balance?.toLocaleString('en')}}</td>
                             <td>
-                                <div class="d-flex">
+                                <div class="d-flex justify-content-center">
 
                                     <a class="cp text-primary" (click)="viewSlip(item?._id)"><i
                                             class="fas fa-eye font-size-18"></i></a>
@@ -94,6 +100,11 @@
                             </td>
                         </tr>
                     </ng-container>
+                    @if (slipList.length == 0) {
+                        <tr>
+                            <td colspan="100%" class="text-center">No data to display!</td>
+                        </tr>
+                    }
                 </tbody>
 
             </table>

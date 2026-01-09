@@ -12,7 +12,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 @Component({
   selector: 'app-create-entries',
   standalone: true,
-  imports: [CommonModule,NgSelectModule, ReactiveFormsModule],
+  imports: [CommonModule, NgSelectModule, ReactiveFormsModule],
   templateUrl: './create-entries.component.html',
   styleUrl: './create-entries.component.scss'
 })
@@ -30,27 +30,27 @@ export class CreateEntriesComponent implements OnInit, OnDestroy {
     private _toastr: ToastrService,
     private fb: FormBuilder,
     private _entries: EntriesService,
-    private _loading:LoadingSlipsService
-  ) {}
+    private _loading: LoadingSlipsService
+  ) { }
 
   ngOnInit(): void {
     this.entriesForm = this.fb.group({
       date: [moment().format('YYYY-MM-DD'), Validators.required],
-      loading_id: [this.loadingId ?? null,Validators.required],
+      loading_id: [this.loadingId ?? null, Validators.required],
       bill_amount: [null],
       amount_recd: [null],
       commission: [null],
-      sheet_no:[null],
+      sheet_no: [null],
       remarks: [null],
     });
-    if(this.entry){
-      this.entriesForm.patchValue({...this.entry,loading_id:this.entry?.loading_id?._id})
+    if (this.entry) {
+      this.entriesForm.patchValue({ ...this.entry, loading_id: this.entry?.loading_id?._id })
     }
-    this.$searchSlip.pipe(takeWhile(()=>this.islive),debounceTime(300),distinctUntilChanged(),switchMap((search)=>this._loading.getLoadingSlips({search:search}))).subscribe((data:any)=>{
-      if(data){
+    this.$searchSlip.pipe(takeWhile(() => this.islive), debounceTime(300), distinctUntilChanged(), switchMap((search) => this._loading.getLoadingSlips({ search: search }))).subscribe((data: any) => {
+      if (data) {
         this.loadingSlips = data.results
       }
-    },(err)=>{
+    }, (err) => {
       this._toastr.error(err)
     })
   }
@@ -62,7 +62,7 @@ export class CreateEntriesComponent implements OnInit, OnDestroy {
         ...this.entriesForm.value,
       };
       if (this.action == 'new') {
-        
+
         this._entries.createEntries(data).subscribe(
           (res: any) => {
             if (res) {
@@ -72,7 +72,7 @@ export class CreateEntriesComponent implements OnInit, OnDestroy {
             }
           },
           (err) => {
-            this.loading = false;            
+            this.loading = false;
             this._toastr.error(err);
           }
         );

@@ -10,6 +10,11 @@ export const routes: Routes = [
       import('./account/account.module').then((m) => m.AccountModule),
   },
   {
+    path: 'onboarding',
+    loadComponent: () =>
+      import('./onboarding/onboarding.component').then((m) => m.OnboardingComponent),
+  },
+  {
     path: '',
     component: LayoutComponent,
     canActivate: [authGuard],

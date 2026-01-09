@@ -16,6 +16,10 @@ export class HelperService {
     const user = JSON.parse(Cookies.get('ndrc_user'));
     return user ? user : null;
   }
+  getFranchiseId() {
+    const id = JSON.parse(Cookies.get('ndrc_franchise') || '{}');
+    return id ? id : null;
+  }
 
   api(url) {
     const api = baseurl + url;

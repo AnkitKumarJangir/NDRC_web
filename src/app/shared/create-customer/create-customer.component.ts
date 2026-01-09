@@ -84,7 +84,7 @@ export class CreateCustomerComponent implements OnInit, OnDestroy {
           },
           (err) => {
             this.loading = false;
-            this._toastr.error(err.statusText);
+            this._toastr.error(err);
           }
         );
       } else {
@@ -98,7 +98,7 @@ export class CreateCustomerComponent implements OnInit, OnDestroy {
           },
           (err) => {
             this.loading = false;
-            this._toastr.error(err.statusText);
+            this._toastr.error(err);
           }
         );
       }

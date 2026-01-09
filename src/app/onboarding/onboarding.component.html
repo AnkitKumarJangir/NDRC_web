@@ -1,0 +1,137 @@
+<div class="container mt-4">
+    <div class="card shadow">
+        <div class="card-header theme-bg-color text-white">
+            <h5 class="mb-0 text-center">Welcome to NDRC Doc</h5>
+        </div>
+
+        <div class="card-body">
+            <div class="col-12">
+                <p class="text-muted">You’re almost there! Please onboard your company to continue with the process.</p>
+            </div>
+            <!-- Step Indicator -->
+            <!-- <ul class="nav nav-pills mb-4 justify-content-center">
+        <li class="nav-item">
+          <span class="text-center">
+            <div class="chip">{{step}}</div>
+            <div class="chip-text">{{step == 1 ? 'Company Details' : step == 2 ? 'Sheet Configuration' :'Subscription Plan'}}</div>
+        </span>
+        </li>
+      </ul> -->
+
+          <app-loader *ngIf="showLoader"></app-loader>
+           <ng-container *ngIf="!showLoader">
+           
+            <form [formGroup]="companyForm">
+
+                <!-- STEP 1 -->
+                <div *ngIf="step === 1" class="px-4">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label>Company Name <code>*</code></label>
+                            <input class="form-control" formControlName="company_name">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Sub Title </label>
+                            <input class="form-control" formControlName="sub_title">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Business Type <code>*</code></label>
+                            <select class="form-control" formControlName="business_type">
+                                <option value="">Select</option>
+                                <option>Broker</option>
+                                <option>Booking</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Email <code>*</code></label>
+                            <input class="form-control" formControlName="company_email">
+                        </div>
+
+                        <div class="col-md-12 mb-3">
+                            <label>Address <code>*</code></label>
+                            <textarea class="form-control" formControlName="address"></textarea>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>PAN No <span class="text-muted">(optional)</span></label>
+                            <input class="form-control" formControlName="pan_no">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>GST No <span class="text-muted">(optional)</span></label>
+                            <input class="form-control" formControlName="gst_no">
+                        </div>
+
+                        <div class="col-md-12">
+                            <label>Contact Numbers <code>*</code></label>
+                            <div *ngFor="let c of contacts.controls; let i = index" class="d-flex mb-2">
+                                <input class="form-control me-2" [formControl]="c">
+                                <button class="btn btn-light btn-sm" (click)="removeContact(i)"
+                                    *ngIf="contacts.length > 1"><i class="fas fa-trash"></i></button>
+                            </div>
+                            <button class="btn btn-outline-primary btn-sm" *ngIf="3 >= contacts.length"
+                                (click)="addContact()">+ Add Contact</button>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end mt-4">
+
+                        <button class="btn text-white theme-bg-color ms-2" type="button" (click)="submit()">
+                           <i *ngIf="loader" class="bx bx-loader bx-spin font-size-18"></i>  Next
+                        </button>
+
+
+                    </div>
+                </div>
+
+                <!-- STEP 2 -->
+                <div *ngIf="step === 2" class="px-4">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label>Serial No</label>
+                            <input class="form-control" min="0" type="number" formControlName="serial_no">
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <label>Sheet No</label>
+                            <input class="form-control" min="0" type="number" formControlName="sheet_no">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Commission (%)</label>
+                            <input class="form-control" min="0" type="number" formControlName="commission_pct">
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end mt-4">
+                        <button class="btn btn-light" type="button" (click)="prev()">
+                            Back
+                        </button>
+
+                        <button class="btn text-white theme-bg-color ms-2" type="button" (click)="updateCompany()">
+                            <i *ngIf="loader" class="bx bx-loader bx-spin font-size-18"></i> Next
+                        </button>
+
+
+                    </div>
+                </div>
+
+                <!-- STEP 3 -->
+                <div *ngIf="step === 3">
+                    <app-subscriptions></app-subscriptions>
+                    <div class="d-flex justify-content-center mt-4">
+
+
+                        <button class="btn btn-success theme-bg-color ms-2" type="button" (click)="skipSubscription()">
+                            Skip for Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+
+
+            </form></ng-container>
+        </div>
+    </div>
+</div>

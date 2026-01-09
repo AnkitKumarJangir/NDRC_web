@@ -23,7 +23,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     private _account: AccountService,
     private _router: Router,
     private _toastr: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -42,12 +42,17 @@ export class LoginComponent implements OnInit, OnDestroy {
         .login(this.loginForm.value)
         .pipe(takeWhile(() => this.isLive))
         .subscribe({
-          next: (response: { data: object; token: string }) => {
+          next: (response: { data: any; token: string }) => {
             if (response) {
               this.loader = false;
               Cookies.set('ndrc_token', response.token);
               Cookies.set('ndrc_user', JSON.stringify(response.data));
+              Cookies.set('ndrc_franchise', JSON.stringify(response.data.franchise_id));
               this._toastr.success('Successfully logged In!');
+              if (!response.data.franchise_id) {
+                this._router.navigateByUrl('/onboarding');
+                return;
+              }
               this._router.navigateByUrl('/dashboard');
             }
           },
